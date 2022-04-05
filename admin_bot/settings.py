@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('TOKEN_ADMIN_BOT', 'django-insecure-jaes6cu-vorpqsppr4c#(
 DEBUG = os.getenv('DEBUG_ADMIN', True)
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

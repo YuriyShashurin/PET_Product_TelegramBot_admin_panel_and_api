@@ -6,6 +6,7 @@ router = routers.DefaultRouter()
 
 
 router.register(r'products', views.ItemViewSet)
+router.register(r'bots', views.BotTypeViewSet)
 
 urlpatterns = [
     path('', include(router.urls))

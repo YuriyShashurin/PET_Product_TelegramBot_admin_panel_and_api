@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = os.getenv('TOKEN_ADMIN_BOT', 'django-insecure-jaes6cu-vorpqsppr4c#(3i87x81mc(up2f(h7axwkgs50%mg(')
+SECRET_KEY = os.getenv('TOKEN_ADMIN_BOT')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -82,7 +82,19 @@ WSGI_APPLICATION = 'admin_bot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+if os.getenv('DB_LOCAL'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'product_bot',
+            'USER': 'postgres',
+            'PASSWORD': os.getenv('DB_PSW'),
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
+else:
+    DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
 
 
 REST_FRAMEWORK = {

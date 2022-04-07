@@ -1,14 +1,98 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ProductBot Manager</title>
+    <link rel="stylesheet"  href="{%  static  'main.css'  %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
-    {% block content %}
+<body style="height: 100%">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">ProductBot</a>
 
-    {% endblock %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Аналитика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Отчеты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">FAQ</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav my-2 my-lg-0 mr-5">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown mr-3">
+                        <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <div class="dropdown-menu mr-3" aria-labelledby="navbarDropdown">
+                            <div class="mb-3">
+                                <img src="{%  static  'default_user_icon.png'  %}" width="30px" height="30px" alt="" class="mr-2 ml-1">
+                                <small class="font-weight-bold">{{ user.first_name }} {{ user.last_name }}</small>
+                            </div>
+                            <a class="dropdown-item" href="/admin-area/user_profile">Профайл</a>
+                            <a class="dropdown-item" href="/admin-area/user_settings">Настройки</a>
+                            <a class="dropdown-item text-danger font-weight-bold" href="/admin-area/logout">Выйти</a>
+
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold" href="/admin-area/login"></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <div role="main">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+        <aside role="complementary">
+            {% block additional %}
+
+            {% endblock %}
+        </aside>
+    </main>
+
+    <footer>
+        <div class="container d-flex flex-row justify-content-between">
+            <div class="col-1-3 d-flex flex-column">
+                <small class="font-weight-bold text-white">ProductBot Manager</small>
+                <small class="font-weight-bold text-white">Stack: Django/aiogram/Postgresql
+                </small>
+                <small class="font-weight-bold text-white">Бот в Telegram:
+                    <a href="https://t.me/SamokatyBot">SamokatyBot</a>
+                </small>
+
+            </div>
+            <div class="col-1-3">
+                <address class="d-flex flex-column">
+                    <small class="text-white">г.Москва, улица Никакая, дом 1, офис 1</small>
+                    <small class="text-white">Тел: +79771111111</small>
+                    <small class="text-white">GitHub:
+                        <a href="https://github.com/YuriyShashurin/PET_Product_TelegramBot_admin_panel_and_api.git">@YuriyShashurin</a>
+                    </small>
+                </address>
+            </div>
+            <div class="col-1-3 text-white">2022 &#169</div>
+        </div>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -19,10 +19,12 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
+from products import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin-area/', include('products.urls')),
+    path('', views.main_page, name='redirect to admin_area'),
     path('api/v1/', include('API.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('openapi/', get_schema_view(

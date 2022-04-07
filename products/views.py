@@ -8,6 +8,10 @@ from .forms import LoginForm
 # Create your views here.
 
 
+def main_page(request):
+    return redirect('/admin-area/login')
+
+
 class ItemsView(ListView):
     model = Item
 
@@ -29,9 +33,16 @@ def login_user(request):
             else:
                 return render(request, 'login.html', {'form': form, 'error_text': "Введен неверный логин/пароль"})
     else:
-        form = LoginForm()
-        return render(request, 'login.html', {'form': form})
+        if request.user.is_authenticated:
+            return redirect('/admin-area/dashboard/')
+        else:
+            form = LoginForm()
+            return render(request, 'login.html', {'form': form})
 
 def logout_view(request):
     logout(request)
-    redirect('/login')
+    return redirect('/admin-area/login')
+
+
+def dashboard(request):
+    return render(request, 'dashboard.html')

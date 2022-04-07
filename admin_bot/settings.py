@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('TOKEN_ADMIN_BOT')
 
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG_ADMIN', True)
-
 
 ALLOWED_HOSTS = ['*']
 
@@ -44,8 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'crispy_forms',
     'products',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

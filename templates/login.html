@@ -3,15 +3,21 @@
 {% block content %}
 
 
+{% load crispy_forms_tags %}
 
-
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-<input type="submit" value="OK" />
-</form>
-
-
+<div class="container d-flex flex-column justify-content-center">
+    <div class="card-header">
+        Вход
+    </div>
+    {% if error_text %}
+        <h5 class="text-danger mt-3">{{ error_text }}</h5>
+    {% endif %}
+    <form method="post" class="container">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Войти</button>
+    </form>
+</div>
 
 
 {% endblock %}

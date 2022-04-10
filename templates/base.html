@@ -5,30 +5,29 @@
     <meta charset="UTF-8">
     <title>ProductBot Manager</title>
     <link rel="stylesheet"  href="{%  static  'main.css'  %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <body style="height: 100%">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">ProductBot</a>
+            <a class="navbar-brand" href="/admin-area/dashboard">ProductBot</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/admin-area/dashboard">Dashboard<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Аналитика</a>
+                        <a class="nav-link" href="/admin-area/dashboard">Аналитика</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Отчеты</a>
+                        <a class="nav-link" href="/admin-area/dashboard">Отчеты</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">FAQ</a>
+                        <a class="nav-link" href="/admin-area/dashboard">FAQ</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="form-inline my-2 my-lg-0" action="/admin-area/dashboard" method="GET">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Поиск по названию бота" aria-label="Search" name="search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav my-2 my-lg-0 mr-5">
@@ -57,14 +56,19 @@
             </div>
         </nav>
     </header>
-    <main class="container">
-        <div role="main">
+    <main class="row mt-3" style="width:96%; margin:0 auto;">
+        <div role="main" class="col-9" >
             {% block content %}
 
             {% endblock %}
         </div>
-        <aside role="complementary">
+        <div role="space" class="col-1 d-flex flex-row justify-content-center" style="width:96%;">
+            <div style="height:100%; width:2px; background-color:#fc9; margin: auto 0">
+            </div>
+        </div>
+        <aside role="additional" class="col-2">
             {% block additional %}
+
 
             {% endblock %}
         </aside>
@@ -93,8 +97,7 @@
             <div class="col-1-3 text-white">2022 &#169</div>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>
 </html>

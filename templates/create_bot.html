@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div>
+        <h2>Добавление нового бота</h2>
+    </div>
+    <form method="post" class="container">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Save" class="btn btn-success">
+    </form>
+
+{% endblock %}
+
+{% block additional %}
+    {% include "sidebar.html" with data=object_list %}
+{% endblock %}

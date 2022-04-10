@@ -1,6 +1,32 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <div class="">Dashboard</div>
+    <div>
+        <h2>Список доступных для управления ботов</h2>
+    </div>
+    {% if not object_list %}
+        Ничего не найдено
+    {% else %}
+    <div class="d-flex flex-wrap">
+        {% for bot in object_list %}
+        <div class="card m-2" style="width: 18rem;">
+            <img src="{%  static  'robot.png'  %}" class="card-img-top" alt="иконка">
+            <div class="card-body">
+                <h5 class="card-title">{{ bot.name }}</h5>
+                <div class="d-flex flex-column">
+                    <small class="mb-2">@{{ bot.telegram_title }}</small>
+                    <small class="">Владелец: {{ bot.owner.first_name }} {{ bot.owner.last_name }}</small>
+                </div>
+                <a href="/admin-area/bot/{{ bot.id }}" class="btn btn-success mt-2">Управление ботом</a>
 
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block additional %}
+    {% include "sidebar.html" with data=object_list %}
 {% endblock %}

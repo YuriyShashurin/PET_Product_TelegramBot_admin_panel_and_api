@@ -1,7 +1,9 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import ListView, DetailView
-from products.models import Item
+from django.views.generic.edit import CreateView
+from products.models import Item, BotType
 from django.contrib.auth import authenticate, login,logout
 from .forms import LoginForm
 
@@ -13,11 +15,52 @@ def main_page(request):
 
 
 class ItemsView(ListView):
+    template_name = 'bot_info.html'
     model = Item
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/admin-area/login')
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class ItemView(DetailView):
     model = Item
+
+
+class BotsViews(ListView):
+    model = BotType
+    template_name = 'dashboard.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/admin-area/login')
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        if search:
+            user_id = self.request.user
+            queryset = BotType.objects.filter(name__contains=search, allowed_users=user_id)
+            if len(queryset) > 0:
+                return queryset
+            else:
+
+                return None
+
+        else:
+            user_id = self.request.user
+            queryset = BotType.objects.filter(allowed_users=user_id)
+            return queryset
+
+
+class CreateBotView(CreateView):
+    model = BotType
+    fields = '__all__'
+    template_name = 'create_bot.html'
+    success_url = '/admin-area/dashboard/'
 
 
 def login_user(request):
@@ -44,5 +87,3 @@ def logout_view(request):
     return redirect('/admin-area/login')
 
 
-def dashboard(request):
-    return render(request, 'dashboard.html')

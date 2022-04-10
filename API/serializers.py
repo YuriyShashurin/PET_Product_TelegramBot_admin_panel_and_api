@@ -14,7 +14,7 @@ class BotTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BotType
-        fields = ['id', 'name', 'description', 'owner', 'allowed_users']
+        fields = ['id', 'name', 'description', 'owner', 'allowed_users', 'telegram_title', 'link']
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -22,6 +22,6 @@ class ItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
-        fields = ['id', 'title', 'description', 'article', 'price', 'country', 'color', 'date_created', 'image', 'bot']
+        fields = ['id', 'title', 'description', 'article', 'price', 'country', 'color', 'date_created', 'image', 'bot', 'total_stock', 'total_bought', 'balance' ]
 
 
